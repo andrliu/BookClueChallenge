@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FriendViewController.h
 //  BookClueChallenge
 //
 //  Created by Andrew Liu on 11/12/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface FriendViewController : UIViewController
 
 @end
-
