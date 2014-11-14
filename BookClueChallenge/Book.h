@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * author;
 @property (nonatomic, retain) NSSet *friends;
 @property (nonatomic, retain) NSSet *comments;
+
 @end
 
 @interface Book (CoreDataGeneratedAccessors)

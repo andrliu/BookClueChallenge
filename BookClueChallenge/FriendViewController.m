@@ -7,13 +7,15 @@
 //  Copyright (c) 2014 Andrew Liu. All rights reserved.
 //
 
+#define kJsonAPI @"http://s3.amazonaws.com/mobile-makers-assets/app/public/ckeditor_assets/attachments/18/friends.json"
+
 #import "FriendViewController.h"
 #import "AppDelegate.h"
-#define kJsonAPI @"http://s3.amazonaws.com/mobile-makers-assets/app/public/ckeditor_assets/attachments/18/friends.json"
 #import "Friend.h"
 #import "CoreData.h"
 
 @interface FriendViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
 @property (nonatomic, strong) NSMutableArray *arrayOfFriendsList;
 @property NSManagedObjectContext *moc;
@@ -33,13 +35,13 @@
     self.arrayOfFriendsList = [coreDataManager retrieveFriendsList];
 
     if (self.arrayOfFriendsList.count == 0)
-    {
+    {   
         [Friend retrieveFriendsListFromJsonAPI:kJsonAPI withCompletion:^(NSMutableArray *arrayOfFriendsList, NSError *connectionError) {
             if (!connectionError)
             {
                 self.arrayOfFriendsList = arrayOfFriendsList;
-                CoreData *coreDataManager = [[CoreData alloc]initWithMOC:self.moc];
                 [coreDataManager storeFriendsListByArray:self.arrayOfFriendsList];
+                self.arrayOfFriendsList = [coreDataManager retrieveFriendsList];
                 [self.friendTableView reloadData];
             }
             else
@@ -83,10 +85,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *friend = self.arrayOfFriendsList[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = [friend valueForKey:@"name"];
-    if ([[friend valueForKey:@"isReader"] isEqual: [NSNumber numberWithBool:YES]])
+    Friend *friend = self.arrayOfFriendsList[indexPath.row];
+    cell.textLabel.text = friend.name;
+    if ([friend.isReader boolValue])
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
@@ -96,5 +98,8 @@
     }
     return cell;
 }
+
+
+
 
 @end

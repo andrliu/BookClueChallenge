@@ -7,13 +7,17 @@
 //
 
 #import "ReaderViewController.h"
+#import "DetailViewController.h"
 #import "AppDelegate.h"
 #import "CoreData.h"
+#import "Friend.h"
 
-@interface ReaderViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ReaderViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *readerTableView;
 @property (nonatomic, strong) NSMutableArray *arrayOfReadersList;
 @property NSManagedObjectContext *moc;
+
 @end
 
 @implementation ReaderViewController
@@ -23,6 +27,7 @@
     [super viewDidLoad];
 
     [self openingAlert];
+    
     AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
     self.moc = delegate.managedObjectContext;
 }
@@ -37,6 +42,30 @@
     [self.readerTableView reloadData];
 }
 
+- (IBAction)sortOnButtonPressed:(UIBarButtonItem *)sender
+{
+    CoreData *coreDataManager = [[CoreData alloc]initWithMOC:self.moc];
+    self.arrayOfReadersList = [coreDataManager filterReadersListByRecommendedBooks];
+
+    [self.readerTableView reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    CoreData *coreDataManager = [[CoreData alloc]initWithMOC:self.moc];
+    if (searchText.length == 0)
+    {
+        self.arrayOfReadersList = [coreDataManager filterReadersList];
+    }
+    else
+    {
+        self.arrayOfReadersList = [coreDataManager filterReadersListByName:searchText];
+    }
+
+    [self.readerTableView reloadData];
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.arrayOfReadersList.count;
@@ -44,9 +73,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *reader = self.arrayOfReadersList[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = [reader valueForKey:@"name"];
+    Friend *reader = self.arrayOfReadersList[indexPath.row];
+    cell.textLabel.text = reader.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Books count: %ld", reader.books.count];
     return cell;
 }
 
@@ -60,6 +90,17 @@
                                                         handler:nil];
     [openingAlert addAction:agreeAction];
     [self presentViewController:openingAlert animated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueFromReaderToDetail"])
+    {
+        DetailViewController *dvc = segue.destinationViewController;
+        NSIndexPath *indexPath = [self.readerTableView indexPathForCell:sender];
+        Friend *reader = self.arrayOfReadersList[indexPath.row];
+        dvc.reader = reader;
+    }
 }
 
 @end

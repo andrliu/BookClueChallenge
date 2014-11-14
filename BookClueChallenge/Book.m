@@ -10,7 +10,6 @@
 #import "Comment.h"
 #import "Friend.h"
 
-
 @implementation Book
 
 @dynamic title;

@@ -15,20 +15,20 @@
 @dynamic isReader;
 @dynamic books;
 
-+ (void)retrieveFriendsListFromJsonAPI:(NSString *)APIstring withCompletion:(friendBlock)complete;
++ (void)retrieveFriendsListFromJsonAPI:(NSString *)jsonAPI withCompletion:(friendBlock)complete;
 {
-    NSURL *url = [NSURL URLWithString:APIstring];
+    NSURL *url = [NSURL URLWithString:jsonAPI];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               if(!connectionError)
+                               if(!connectionError && data)
                                {
                                    NSError *JSONError;
                                    NSMutableArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data
                                                                                         options:NSJSONReadingAllowFragments
                                                                                           error:&JSONError];
-                                   if(!JSONError)
+                                   if(!JSONError && data)
                                    {
                                        NSMutableArray *arrayOfFriendsList = [@[]mutableCopy];
                                        for (NSString *stringOfFriendName in jsonArray)

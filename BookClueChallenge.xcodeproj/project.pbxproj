@@ -21,6 +21,8 @@
 		493F28BB1A1467FE009318C6 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 493F28BA1A1467FE009318C6 /* Book.m */; };
 		493F28BE1A146818009318C6 /* CoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 493F28BD1A146818009318C6 /* CoreData.m */; };
 		493F28C21A151495009318C6 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 493F28C11A151495009318C6 /* DetailViewController.m */; };
+		49DBC6CF1A16657900C2CCD7 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBC6CE1A16657900C2CCD7 /* BookViewController.m */; };
+		49DBC6D21A16785200C2CCD7 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBC6D11A16785200C2CCD7 /* CommentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		493F28BD1A146818009318C6 /* CoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreData.m; sourceTree = "<group>"; };
 		493F28C01A151495009318C6 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		493F28C11A151495009318C6 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		49DBC6CD1A16657900C2CCD7 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		49DBC6CE1A16657900C2CCD7 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
+		49DBC6D01A16785200C2CCD7 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		49DBC6D11A16785200C2CCD7 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,10 @@
 				493F28B11A146068009318C6 /* FriendViewController.m */,
 				493F28C01A151495009318C6 /* DetailViewController.h */,
 				493F28C11A151495009318C6 /* DetailViewController.m */,
+				49DBC6CD1A16657900C2CCD7 /* BookViewController.h */,
+				49DBC6CE1A16657900C2CCD7 /* BookViewController.m */,
+				49DBC6D01A16785200C2CCD7 /* CommentViewController.h */,
+				49DBC6D11A16785200C2CCD7 /* CommentViewController.m */,
 				493F28941A14602C009318C6 /* Main.storyboard */,
 				493F28971A14602C009318C6 /* Images.xcassets */,
 				493F28991A14602C009318C6 /* LaunchScreen.xib */,
@@ -260,11 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DBC6D21A16785200C2CCD7 /* CommentViewController.m in Sources */,
 				493F28B81A1467FE009318C6 /* Comment.m in Sources */,
 				493F288D1A14602C009318C6 /* AppDelegate.m in Sources */,
 				493F28901A14602C009318C6 /* BookClueChallenge.xcdatamodeld in Sources */,
 				493F28931A14602C009318C6 /* ReaderViewController.m in Sources */,
 				493F28BB1A1467FE009318C6 /* Book.m in Sources */,
+				49DBC6CF1A16657900C2CCD7 /* BookViewController.m in Sources */,
 				493F28C21A151495009318C6 /* DetailViewController.m in Sources */,
 				493F28B51A1467FE009318C6 /* Friend.m in Sources */,
 				493F28B21A146068009318C6 /* FriendViewController.m in Sources */,
@@ -460,6 +472,7 @@
 				493F28AC1A14602C009318C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		493F28AD1A14602C009318C6 /* Build configuration list for PBXNativeTarget "BookClueChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +481,7 @@
 				493F28AF1A14602C009318C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
